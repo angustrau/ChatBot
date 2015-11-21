@@ -1,0 +1,5 @@
+﻿exports.chatbotEvent = function(message, type, info, id) {
+    if (type != "text") return;
+    
+    info.handler("[Echo] " + message, id)   ; 
+}
