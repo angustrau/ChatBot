@@ -41,12 +41,12 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-providers/facebook.json
+providers/facebooka.json
 .ntvs_analysis.dat
 bin/Microsoft.NodejsTools.WebRole.dll
 *.njsproj
 obj/Debug/ChatBot.njsproj.FileListAbsolute.txt
 obj/Debug/ChatBot.njsprojResolveAssemblyReference.cache
-providers/hangouts.json
-providers/skype.json
+providers/hangoutsa.json
+providers/skypea.json
 .ntvs_analysis.dat.tmp
