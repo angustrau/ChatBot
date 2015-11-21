@@ -11,7 +11,7 @@ var userCache = {};
 function getAuthToken() {
     return Q().then(function() {
         return Q.Promise(function(rs) {
-            rs(config.authToken);
+            rs(config.authtoken);
         });
     });    
 }
@@ -68,7 +68,7 @@ exports.chatbotInit = function(chatRecieve) {
 
     config = require("./hangouts.json");
 
-    if (!config.authToken) {
+    if (!config.authtoken) {
         console.log("[Hangouts] Auth token not provided, get one here: https://accounts.google.com/o/oauth2/auth?&client_id=936475272427.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.google.com%2Faccounts%2FOAuthLogin&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code");
         return;
     }
