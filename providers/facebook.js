@@ -53,6 +53,11 @@ exports.chatbotInit = function(chatRecieve) {
                 case "event":
                     switch(message.logMessageType) {
                         case "log:thread-name":
+                            var info = getInfoTemplate(message);
+                            info.name = message.logMessageBody.split(" named")[0]; //Only provides the first name
+                            info.username = message.author;
+
+                            recieveHandler(message.logMessageData.name, "facebook_groupNameChange", info, message.threadID);
                             break;
                         case "log:subscribe":
                             for (i=0;i<message.logMessageData.added_participants.length;i++) {
