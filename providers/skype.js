@@ -11,6 +11,7 @@ function getInfoTemplate(message) {
     var info = {
         "handler":sendMessage,
         "service":"skype",
+        "api":Skyweb,
         "raw":message,
         "name":message.resource.imdisplayname,
         "username":username[username.length - 1].slice(2)

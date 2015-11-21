@@ -30,6 +30,7 @@ function getInfoTemplate(message) {
     var info = {
         "handler":sendMessage,
         "service":"hangouts",
+        "api":Hangups,
         "raw":message,
         "name":name,
         "username":message.sender_id.chat_id

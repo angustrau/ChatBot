@@ -9,6 +9,7 @@ function getInfoTemplate(message) {
     var info = {
         "handler":sendMessage,
         "service":"facebook",
+        "api":Facebook,
         "raw":message,
         "name":message.senderName,
         "username":message.senderID
@@ -36,9 +37,9 @@ exports.chatbotInit = function(chatRecieve) {
 
         Facebook = api;
 
-        console.log("[Facebook] Logged in as " + config.email);
+        console.log("[Facebook] Logged in as " + api.getCurrentUser());
 
-        api.setOptions({"listenEvents":true, "updatePresence":true});
+        api.setOptions({"listenEvents":true, "updatePresence":true, "forceLogin":true});
 
         stopListening = api.listen(function(err, message) {
             if (err) return console.log("[Facebook] Error in listen event");
