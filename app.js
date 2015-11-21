@@ -1,4 +1,4 @@
-﻿console.log("ChatBot v1.0");
+﻿console.log("ChatBot v1.2");
 console.log("By Angus Trau");
 console.log("");
 
