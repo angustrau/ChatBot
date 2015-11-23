@@ -37,5 +37,5 @@ exports.chatbotEvent = function(message, type, info, id) {
         }  
     }
 
-    if (!validCommand) info.handler("Command not recognised", id);
+    //if (!validCommand) info.handler("Command not recognised", id);
 }
