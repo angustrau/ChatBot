@@ -18,7 +18,7 @@ function chatRecieve(message, type, info, id) {
     log.info("Recieved message '" + message + "' of type '" + type + "', id: " + id, info.service);
 
     plugins.forEach(function(plugin) {
-        plugin.chatbotEvent(message, type, info, id);
+        if (plugin.chatbotEvent) plugin.chatbotEvent(message, type, info, id);
     });
 }
 
@@ -38,11 +38,7 @@ providerFiles.forEach(function(filename) {
     log.info("Loading " + filename + "...", "ChatBot");
     var provider = require("./providers/" + filename);
 
-    if (provider.chatbotInit) {
-        provider.chatbotInit(chatRecieve);
-    } else {
-        return;
-    };
+    if (provider.chatbotInit) provider.chatbotInit(chatRecieve);
 
     providers.push(provider);
 
@@ -57,8 +53,6 @@ pluginFiles.forEach(function(filename) {
 
      log.info("Loading " + filename + "...", "ChatBot");
      var plugin = require("./plugins/" + filename);
-
-     if (!plugin.chatbotEvent) return;
 
      if (plugin.chatbotInit) plugin.chatbotInit(chatBroadcast);
 
