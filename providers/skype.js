@@ -26,6 +26,8 @@ function sendMessage(message, id) {
     Skyweb.sendMessage(id, message);
 }
 
+exports.send = sendMessage;
+
 Skyweb.messagesCallback = function(messages) {
     messages.forEach(function(message) {
         if (message.resource.from.indexOf(config.username) === -1 && message.resource.messagetype !== 'Control/Typing' && message.resource.messagetype !== 'Control/ClearTyping') {

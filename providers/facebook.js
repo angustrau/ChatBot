@@ -25,6 +25,8 @@ function sendMessage(message, id) {
     log.info("Sent message '" + message + "' to " + id, "Facebook");
 }
 
+exports.send = sendMessage;
+
 exports.chatbotInit = function(chatRecieve) {
     recieveHandler = chatRecieve;
 

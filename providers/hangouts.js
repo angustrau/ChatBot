@@ -48,6 +48,8 @@ function sendMessage(message, id) {
     log.info("Sent message '" + message + "' to " + id, "Hangouts");
 }
 
+exports.send = sendMessage;
+
 Hangups.on("chat_message", function(message) {
     if (message.sender_id.chat_id == self_id) return;
 
