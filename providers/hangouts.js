@@ -1,6 +1,7 @@
 ﻿var HangupsLib = require("./hangouts/src/client.js");
 var Hangups = new HangupsLib();
 var Q = require("./hangouts/node_modules/q");
+var log = require("../logging.js");
 
 var recievehandler;
 var config = {};
@@ -42,7 +43,7 @@ function sendMessage(message, id) {
     var builder = new HangupsLib.MessageBuilder();
     var segments = builder.text(message).linebreak().toSegments();
     Hangups.sendchatmessage(id, segments);
-    console.log("[Hangouts] Sent message '" + message + "' to " + id);
+    log.info("Sent message '" + message + "' to " + id, "Hangouts");
 }
 
 Hangups.on("chat_message", function(message) {
@@ -59,6 +60,7 @@ Hangups.on("chat_message", function(message) {
 
 Hangups.on("connect_failed", function() {
     //Reconnect the client if disconnected
+    log.error("Connection failed. Retrying in 3 seconds...", "Hangouts");
     Q.Promise(function(rs) {
         setTimeout(rs, 3000);
     }).then(exports.chatbotInit(recieveHandler));
@@ -70,7 +72,7 @@ exports.chatbotInit = function(chatRecieve) {
     config = require("./hangouts.json");
 
     if (!config.authtoken) {
-        console.log("[Hangouts] Auth token not provided, get one here: https://accounts.google.com/o/oauth2/auth?&client_id=936475272427.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.google.com%2Faccounts%2FOAuthLogin&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code");
+        log.error("Auth token not provided, get one here: https://accounts.google.com/o/oauth2/auth?&client_id=936475272427.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.google.com%2Faccounts%2FOAuthLogin&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code", "Hangouts");
         return;
     }
     
@@ -79,7 +81,7 @@ exports.chatbotInit = function(chatRecieve) {
             Hangups.getselfinfo().then(function(user) {
                 self_user = user;
                 self_id = user.self_entity.id.chat_id;
-                console.log("[Hangouts] Connected as " + user.self_entity.properties.display_name);
+                log.info("Connected as " + user.self_entity.properties.display_name, "Hangouts");
             });
         })
         .done();

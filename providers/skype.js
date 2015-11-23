@@ -2,6 +2,7 @@
 var SkywebUtils = require('./skype/dist/skyweb/utils.js');
 var SkywebLib = require("./skype/dist/skyweb/skyweb.js");
 var Skyweb = new SkywebLib();
+var log = require("../logging.js");
 
 var recieveHandler;
 var config = {};
@@ -37,7 +38,7 @@ Skyweb.authRequestCallback = function(requests) {
     //accept all requests
     requests.forEach(function(request) {
         Skyweb.acceptAuthRequest(request.sender);
-        console.info("[Skype] Contact request from " + request.sender + " has been accepted");
+        log.info("Contact request from " + request.sender + " has been accepted", "Skype");
 
         setTimeout(function() {
             Skyweb.sendMessage("8:" + request.sender, "Hello!");
@@ -51,12 +52,12 @@ exports.chatbotInit = function(chatRecieve) {
     config = require("./skype.json");
 
     if (!config.username || ! config.password) {
-        console.info("[Skype] Username or password not provided, module disabled");
+        log.error("Username or password not provided, module disabled", "Skype");
         return;    
     }
 
     Skyweb.login(config.username, config.password)
         .then(function(account) {
-            console.log("[Skype] Logged in as " + account.username);
+            log.info("Logged in as " + account.username, "Skype");
         });
 }

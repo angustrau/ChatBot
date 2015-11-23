@@ -1,4 +1,5 @@
 ﻿var login = require("./facebook/index.js");
+var log = require("../logging.js");
 
 var recieveHandler;
 var config = {};
@@ -19,7 +20,7 @@ function getInfoTemplate(message) {
 
 function sendMessage(message, id) {
     Facebook.sendMessage(message, id);
-    console.log("[Facebook] Sent message '" + message + "' to " + id);
+    log.info("Sent message '" + message + "' to " + id, "Facebook");
 }
 
 exports.chatbotInit = function(chatRecieve) {
@@ -28,21 +29,21 @@ exports.chatbotInit = function(chatRecieve) {
     config = require("./facebook.json");
 
     if (!config.email || !config.password) {
-        console.log("[Facebook] Email or password not provided, module disabled");
+        log.erro("Email or password not provided, module disabled", "Facebook");
         return;    
     }
 
     login(config, function(err, api) {
-        if (err) return console.log("[Facebook] Error logging in");
+        if (err) return log.error("Error logging in", "Facebook");
 
         Facebook = api;
 
-        console.log("[Facebook] Logged in as " + api.getCurrentUser());
+        log.info("Logged in as " + api.getCurrentUserID(), "Facebook");
 
         api.setOptions({"listenEvents":true, "updatePresence":true, "forceLogin":true});
 
         stopListening = api.listen(function(err, message) {
-            if (err) return console.log("[Facebook] Error in listen event");
+            if (err) return log.error("Error in listen event", "Facebook");
 
             switch(message.type) {
                 case "message":

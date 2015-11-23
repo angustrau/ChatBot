@@ -1,11 +1,12 @@
 /// <reference path='../typings/tsd.d.ts' />
 var sha256 = require('js-sha256');
 var bigInt = require("big-integer");
+var log = require("../../../../logging.js");
 var Utils = (function () {
     function Utils() {
     }
     Utils.throwError = function (message) {
-        console.error('[Skype] Something went wrong!' + message);
+        log.error('Something went wrong!' + message, "Skype");
     };
     Utils.getCurrentTime = function () {
         return (new Date().getTime()) / 1000;

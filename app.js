@@ -1,9 +1,6 @@
-﻿console.log("ChatBot v1.2");
-console.log("By Angus Trau");
-console.log("");
-
-var fs = require("fs");
+﻿var fs = require("fs");
 var path = require("path");
+var log = require("./logging.js")
 
 var providers = [];
 var plugins = [];
@@ -18,7 +15,7 @@ function chatBroadcast(message) {
 function chatRecieve(message, type, info, id) {
     type = type || "text";
 
-    console.log("Recieved message '" + message + "' of type '" + type + "' from " + info.service);
+    log.info("Recieved message '" + message + "' of type '" + type + "', id: " + id, info.service);
 
     plugins.forEach(function(plugin) {
         plugin.chatbotEvent(message, type, info, id);
@@ -29,12 +26,16 @@ function chatNewBroadcaster(callback) {
     chats.push(callback);
 }
 
-console.log("Loading providers...")
+log.info("ChatBot v1.2".bold, "ChatBot");
+log.info("By Angus Trau", "ChatBot");
+console.log("");
+
+log.info("Loading providers...", "ChatBot")
 var providerFiles = fs.readdirSync("providers");
 providerFiles.forEach(function(filename) {
     if (fs.lstatSync("providers/" + filename).isDirectory() || path.extname(filename) != ".js") return;
 
-    console.log("Loading " + filename + "...");
+    log.info("Loading " + filename + "...", "ChatBot");
     var provider = require("./providers/" + filename);
 
     if (provider.chatbotInit) {
@@ -45,16 +46,16 @@ providerFiles.forEach(function(filename) {
 
     providers.push(provider);
 
-    console.log("Loaded " + filename);
+    log.info("Loaded " + filename, "ChatBot");
 });
-console.log("Loaded providers");
+log.info("Loaded providers", "ChatBot");
 
-console.log("Loading plugins...");
+log.info("Loading plugins...", "ChatBot");
 var pluginFiles = fs.readdirSync("plugins");
 pluginFiles.forEach(function(filename) {
      if (fs.lstatSync("plugins/" + filename).isDirectory() || path.extname(filename) != ".js") return;
 
-     console.log("Loading " + filename + "...");
+     log.info("Loading " + filename + "...", "ChatBot");
      var plugin = require("./plugins/" + filename);
 
      if (!plugin.chatbotEvent) return;
@@ -63,6 +64,7 @@ pluginFiles.forEach(function(filename) {
 
      plugins.push(plugin);
 
-     console.log("Loaded " + filename);
+     log.info("Loaded " + filename, "ChatBot");
 });
-console.log("Loaded plugins");
+log.info("Loaded plugins", "ChatBot");
+console.log("");

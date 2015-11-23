@@ -2,6 +2,7 @@
 var request = require('request');
 var Consts = require('./consts');
 var Utils = require('./utils');
+var log = require("../../../../logging.js");
 'use strict';
 var MessageService = (function () {
     function MessageService(cookieJar) {
@@ -13,7 +14,7 @@ var MessageService = (function () {
             'messagetype': 'RichText',
             'contenttype': 'text'
         });
-        console.log('[Skype] sending message ' + requestBody);
+        log.info('sending message ' + requestBody, "Skype");
         this.requestWithJar.post(Consts.SKYPEWEB_HTTPS + skypeAccount.messagesHost + '/v1/users/ME/conversations/' + conversationId + '/messages', {
             body: requestBody,
             headers: {

@@ -1,6 +1,6 @@
 ﻿var fs = require("fs");
 var path = require("path");
-
+var log = require("../logging.js");
 var plugins = [];
 
 var pluginFiles = fs.readdirSync("Plugins/commands");
@@ -10,7 +10,7 @@ pluginFiles.forEach(function(filename) {
     var plugin = require("./commands/" + filename);
     if (!plugin) return;
 
-    console.log("[Commands] Loaded " + filename);
+    log.info("Loaded " + filename, "Commands");
     
     plugins.push(plugin); 
 });
