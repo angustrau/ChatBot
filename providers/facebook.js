@@ -1,4 +1,6 @@
-﻿var login = require("./facebook/index.js");
+﻿exports.name = "facebook"; //has to be the same as "service"
+
+var login = require("./facebook/index.js");
 var log = require("../logging.js");
 
 var recieveHandler;
@@ -9,7 +11,7 @@ var stopListening;
 function getInfoTemplate(message) {
     var info = {
         "handler":sendMessage,
-        "service":"facebook",
+        "service":"facebook", //Has to be the same as exports.name
         "api":Facebook,
         "raw":message,
         "name":message.senderName,

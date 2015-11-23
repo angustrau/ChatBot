@@ -1,4 +1,6 @@
-﻿var fs = require("fs");
+﻿exports.name = "skype"; //Has to be the same as "service"
+
+var fs = require("fs");
 var SkywebUtils = require('./skype/dist/skyweb/utils.js');
 var SkywebLib = require("./skype/dist/skyweb/skyweb.js");
 var Skyweb = new SkywebLib();
@@ -11,7 +13,7 @@ function getInfoTemplate(message) {
     var username = message.resource.from.split("/");
     var info = {
         "handler":sendMessage,
-        "service":"skype",
+        "service":"skype", //Has to be the same as exports.name
         "api":Skyweb,
         "raw":message,
         "name":message.resource.imdisplayname,

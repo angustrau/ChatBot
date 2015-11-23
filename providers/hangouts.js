@@ -1,4 +1,6 @@
-﻿var HangupsLib = require("./hangouts/src/client.js");
+﻿exports.name = "hangouts"; //has to be the same as "service"
+
+var HangupsLib = require("./hangouts/src/client.js");
 var Hangups = new HangupsLib();
 var Q = require("./hangouts/node_modules/q");
 var log = require("../logging.js");
@@ -30,7 +32,7 @@ function getInfoTemplate(message) {
 
     var info = {
         "handler":sendMessage,
-        "service":"hangouts",
+        "service":"hangouts", //Has to be the same as exports.name
         "api":Hangups,
         "raw":message,
         "name":name,
