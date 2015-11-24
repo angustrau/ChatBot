@@ -33,7 +33,7 @@ exports.chatbotInit = function(chatRecieve) {
     config = require("./facebook.json");
 
     if (!config.email || !config.password) {
-        log.erro("Email or password not provided, module disabled", "Facebook");
+        log.error("Email or password not provided, module disabled", "Facebook");
         return;    
     }
 
