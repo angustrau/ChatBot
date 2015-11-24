@@ -18,7 +18,7 @@ function chatRecieve(message, type, info, id) {
 
     info.provider = providers[info.service];
 
-    log.info("Recieved message '" + message + "' of type '" + type + "', id: " + id, info.service);
+    log.info("Recieved message '" + message + "' of type '" + type + "', id: " + id, info.service + " --> message reciever");
 
     plugins.forEach(function(plugin) {
         if (plugin.chatbotEvent) plugin.chatbotEvent(message, type, info, id); //Called when a message is recieved
