@@ -48,7 +48,7 @@ exports.chatbotProviders = function(chatProviders) {
 exports.chatbotEvent = function(message, type, info, id) {
     if (type != "text") return;
 
-    if (message.slice(0, 7) == "!bridge") {
+    if (message.slice(0, 7).toLowerCase() == "!bridge") {
         //command
         var args = message.slice(8).split(" ");
         var command = args[0].toLowerCase();
