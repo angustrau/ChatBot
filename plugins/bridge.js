@@ -56,24 +56,26 @@ exports.chatbotEvent = function(message, type, info, id) {
 
         switch(command) {
             case "register":
-                if (args[0] == "") {
-                    info.handler("No password provided. Type '!bridge help' for more info", id);
-                    return;
+                //Generate random id
+                var registerID = "";
+                var possible = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
+                for( var i=0; i < 5; i++ ) {
+                    registerID = registerID + possible.charAt(Math.floor(Math.random() * possible.length));
                 }
 
                 var chat = newChat(info, id);
-                openHosts[args[0]] = chat;
+                openHosts[registerID] = chat;
 
                 //add 5 minute registration timeout
                 setTimeout(function() {
-                    stopRegistration(args[0]);
+                    stopRegistration(registerID);
                 }, 300000);
 
-                info.handler("Chat open for bridging. Type '!bridge join " + args[0] + "' in another chat within 5 minutes to complete bridge", id);
+                info.handler("Chat open for bridging. Type '!bridge join " + registerID + "' in another chat within 5 minutes to complete bridge", id);
                 break;
             case "join":
                 if (args[0] == "") {
-                    info.handler("No password provided. Type '!bridge help' for more info", id);
+                    info.handler("No ID provided. Type '!bridge help' for more info", id);
                     return;
                 }
 
@@ -92,7 +94,7 @@ exports.chatbotEvent = function(message, type, info, id) {
 
                     log.info("Bridged created. " + chat.id + " --> " + target.id, "Bridge");
                 } else {
-                    info.handler("COuld not bridge with the chat with password '" + args[0] + "'. The chat is either not open for bridging, the password been misspelled, the password has already been used, or the password has expired.", id);
+                    info.handler("Could not bridge with the chat with ID '" + args[0] + "'. The chat is either not open for bridging, the ID been misspelled, the ID has already been used, or the ID has expired.", id);
                     return;
                 }
 
@@ -111,7 +113,7 @@ exports.chatbotEvent = function(message, type, info, id) {
                 break;
             case "help":
             default:
-                info.handler("Bridge:\nregister <password>: Initiate a bridge with <password>. Password is single use only.\njoin <password>: Finalise a bridge that has registered with <password>.\ndestroy: Destroy all outgoing bridges.\nhelp: Display help.", id);
+                info.handler("Bridge:\nregister <password>: Initiate a bridge.\njoin <ID>: Finalise a bridge that has registered with ID. ID is one use only.\ndestroy: Destroy all outgoing bridges.\nhelp: Display help.", id);
                 break;
         }
     } else {
