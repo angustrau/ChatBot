@@ -51,3 +51,5 @@ providers/hangouts.json
 providers/skype.json
 .ntvs_analysis.dat.tmp
 plugins/bridge/bridges.json
+providers/irc/channels.json
+providers/irc.json
