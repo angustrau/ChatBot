@@ -1,7 +1,7 @@
 ﻿{
-  "server":"s",
+  "server":"",
   "port":6667,
-  "nick":"a",
+  "nick":"",
   "password":"",
   "username":"ChatBot",
   "realname":"ChatBot"
