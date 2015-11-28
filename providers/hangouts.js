@@ -23,9 +23,11 @@ function getInfoTemplate(message) {
     Hangups.getentitybyid([message.sender_id.chat_id]).then(function(users) {
         //initiate request for user info. it may not be avaliable in time now, but will be cached for the next message
         userCache[users.entities[0].id.chat_id] = users.entities[0].properties;
+        log.info("Found user info. " + users.entities[0].id.chat_id + " --> " + users.entities[0].properties.display_name, "Hangouts");
+
     });
 
-    var name = "unknown";
+    var name = message.sender_id.chat_id;
     if (userCache[message.sender_id.chat_id]) {
         name = userCache[message.sender_id.chat_id].display_name;
     }
