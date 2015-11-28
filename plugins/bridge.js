@@ -58,7 +58,7 @@ exports.chatbotEvent = function(message, type, info, id) {
             case "register":
                 //Generate random id
                 var registerID = "";
-                var possible = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
+                var possible = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz123456789"; //Similar looking characters have been removed
                 for( var i=0; i < 5; i++ ) {
                     registerID = registerID + possible.charAt(Math.floor(Math.random() * possible.length));
                 }
