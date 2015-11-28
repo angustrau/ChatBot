@@ -25,7 +25,7 @@ function getInfoTemplate(message) {
         userCache[users.entities[0].id.chat_id] = users.entities[0].properties;
     });
 
-    var name = "";
+    var name = "unknown";
     if (userCache[message.sender_id.chat_id]) {
         name = userCache[message.sender_id.chat_id].display_name;
     }
