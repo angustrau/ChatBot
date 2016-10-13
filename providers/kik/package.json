@@ -1,0 +1,13 @@
+{
+  "name": "KiKModule",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.js",
+  "author": {
+    "name": "Angus Trau",
+    "email": ""
+  },
+  "dependencies": {
+    "@kikinteractive/kik": "^2.0.0"
+  }
+}

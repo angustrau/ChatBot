@@ -51,3 +51,4 @@ providers/hangouts.json
 providers/skype.json
 .ntvs_analysis.dat.tmp
 plugins/bridge/bridges.json
+node_modules

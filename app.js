@@ -57,8 +57,14 @@ pluginFiles.forEach(function(filename) {
      log.info("Loading " + filename + "...", "ChatBot");
      var plugin = require("./plugins/" + filename);
 
-     if (plugin.chatbotInit) plugin.chatbotInit(chatBroadcast); //Called on init. Passes a callback to broadcast a message to all open chats
+     try {
+         if (plugin.chatbotInit) plugin.chatbotInit(chatBroadcast); //Called on init. Passes a callback to broadcast a message to all open chats
      if (plugin.chatbotProviders) plugin.chatbotProviders(providers); //Passes providers to a plugin if requested
+     } catch (e) {
+         
+     };
+     
+     
 
      plugins.push(plugin);
 
