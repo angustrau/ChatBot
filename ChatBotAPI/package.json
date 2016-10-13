@@ -1,0 +1,9 @@
+{
+  "name": "chat-bot-api",
+  "version": "0.0.0",
+  "description": "ChatBotAPI",
+  "main": "app.js",
+  "author": {
+    "name": "Angus"
+  }
+}
